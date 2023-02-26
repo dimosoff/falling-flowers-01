@@ -1,0 +1,97 @@
+@mixin keyframe($n) {
+  @keyframes fall-#{$n} {
+    @content;
+  }
+}
+
+@mixin flowerAnimation($number) {
+  $top: calc(random(20) + 40);
+  $scale: calc(random() / 2 + 0.5);
+  $speed: 20;
+  $position: random(100);
+
+  .flowers > div:nth-child(#{$number}) {
+    opacity: calc(random() / 2 + 0.5);
+    transform: translate(
+        #{calc($position + random(20) - 10)}vw,
+        calc($flower-size * -2)
+      )
+      scale($scale) rotate(#{calc(random(360) - 180)}deg);
+    animation: fall-#{$number} #{random(15) + $speed}s -#{random(30)}s linear
+      infinite;
+  }
+  @include keyframe($number) {
+    #{random(30) + 35}% {
+      transform: translate(#{calc($position + random(20) - 10)}vw, #{$top}vh)
+        scale($scale) rotate(#{calc(random(360) - 180)}deg);
+    }
+    to {
+      transform: translate(#{calc($position + random(20) - 10)}vw, 100vh)
+        scale($scale) rotate(#{calc(random(360) - 180)}deg);
+    }
+  }
+}
+
+$h-flowers: (
+  f1: "../flowers/h-flower-01.png",
+  f1-w: 207px,
+  f1-h: 150px,
+  f2: "../flowers/h-flower-02.png",
+  f2-w: 199px,
+  f2-h: 174px,
+  f3: "../flowers/h-flower-03.png",
+  f3-w: 191px,
+  f3-h: 233px,
+  f4: "../flowers/h-flower-04.png",
+  f4-w: 115px,
+  f4-h: 112px,
+  f5: "../flowers/h-flower-05.png",
+  f5-w: 148px,
+  f5-h: 314px,
+  f6: "../flowers/h-flower-06.png",
+  f6-w: 185px,
+  f6-h: 226px,
+  f7: "../flowers/h-flower-07.png",
+  f7-w: 131px,
+  f7-h: 131px,
+  f8: "../flowers/h-flower-08.png",
+  f8-w: 209px,
+  f8-h: 168px,
+);
+
+@mixin flowerHeading($number) {
+  $f-number: random(8);
+  $delta: calc(random() + 2);
+  $delay: calc(random() * 2);
+
+  $url: map-get($h-flowers, f#{$f-number});
+  $width: round(calc(map-get($h-flowers, f#{$f-number}-w) / $delta));
+  $height: round(calc(map-get($h-flowers, f#{$f-number}-h) / $delta));
+  $margin: #{round(calc(-5 * $delta))}px;
+
+  .h-flowers > div:nth-child(#{$number}) {
+    width: $width;
+    height: $height;
+    margin: 0 $margin $margin;
+    animation: wave 6s cubic-bezier(.5,0,.5,1) #{$delay}s infinite;
+    background: url($url) center / contain no-repeat transparent;
+  }
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-5deg);
+  }
+  60% {
+    transform: rotate(4deg);
+  }
+  85% {
+    transform: rotate(-1deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

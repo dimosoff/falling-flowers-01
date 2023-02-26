@@ -1,0 +1,34 @@
+@import "_utility";
+
+$flower-size: 20px;
+
+.flowers {
+  user-select: none;
+  pointer-events: none;
+
+  & > div {
+    position: absolute;
+    width: $flower-size;
+    height: $flower-size;
+    background: url("../flowers/flower.png") center / contain no-repeat
+      transparent;
+  }
+}
+.h-flowers {
+  display: flex;
+  transform: translateY(-65%);
+  align-items: center;
+  justify-content: center;
+
+  & > div {
+    transform-origin: center top;
+  }
+}
+
+@for $i from 1 to 201 {
+  @include flowerAnimation($i);
+}
+
+@for $j from 1 to 33 {
+  @include flowerHeading($j);
+}
