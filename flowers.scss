@@ -1,11 +1,15 @@
 @import "_utility";
 
 $flower-size: 20px;
-
-.flowers {
+.iwd {
+  top: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
   user-select: none;
   pointer-events: none;
-
+}
+.flowers {
   & > div {
     position: absolute;
     width: $flower-size;
@@ -16,19 +20,20 @@ $flower-size: 20px;
 }
 .h-flowers {
   display: flex;
-  transform: translateY(-65%);
+  transform: translateY(-60%);
   align-items: center;
   justify-content: center;
 
   & > div {
+    flex-shrink: 0;
     transform-origin: center top;
   }
 }
 
-@for $i from 1 to 201 {
+@for $i from 1 to 101 {
   @include flowerAnimation($i);
 }
 
-@for $j from 1 to 33 {
+@for $j from 1 to 51 {
   @include flowerHeading($j);
 }
