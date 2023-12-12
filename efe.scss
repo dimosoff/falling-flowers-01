@@ -1,6 +1,9 @@
+$element-size: 20px;
+$wind: false;
+$heading: false;
+
 @import "_utility";
 
-$element-size: 20px;
 .efe {
   top: 0;
   left: 0;
@@ -9,8 +12,9 @@ $element-size: 20px;
   bottom: 0;
   margin: 0 auto;
   z-index: 999999;
+  position: fixed;
   overflow: hidden;
-  position: absolute;
+  max-width: 100%;
   font-size: 19.2px;
   user-select: none;
   pointer-events: none;
@@ -31,24 +35,31 @@ $element-size: 20px;
       }
     }
   }
-  &__header {
-    display: flex;
-    transform: translateY(-60%);
-    align-items: center;
-    justify-content: center;
+  @if ($heading) {
+    &__header {
+      display: flex;
+      transform: translateY(-60%);
+      align-items: center;
+      justify-content: center;
 
-    & > div {
-      flex-shrink: 0;
-      transform-origin: center top;
+      & > div {
+        flex-shrink: 0;
+        transform-origin: center top;
+      }
     }
   }
 }
 
 @for $i from 1 to 101 {
-  @include fallingAnimation01($i);
-  // @include fallingAnimation02($i);
+  @if ($wind) {
+    @include fallingAnimation02($i);
+  } @else {
+    @include fallingAnimation01($i);
+  }
 }
 
-@for $j from 1 to 51 {
-  @include flowerHeading($j);
+@if ($heading) {
+  @for $j from 1 to 51 {
+    @include flowerHeading($j);
+  }
 }
