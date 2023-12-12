@@ -2,6 +2,7 @@ const NEW_YEAR_TOYS = document.querySelectorAll(".new-year__toy");
 
 NEW_YEAR_TOYS.forEach(function (toy) {
   toy.addEventListener("mouseenter", nyToyHoverHandler);
+  toy.addEventListener("touchstart", nyToyHoverHandler);
 });
 
 function nyToyHoverHandler(event) {

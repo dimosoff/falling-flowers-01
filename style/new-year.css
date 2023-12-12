@@ -8,11 +8,42 @@
 .new-year {
   left: 0;
   right: 0;
-  bottom: -50px;
-  display: flex;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
   position: absolute;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  pointer-events: none;
+}
+.new-year__inner {
+  display: flex;
+  padding: 100px 0 0;
+  transform: translateY(25%);
   align-items: center;
   justify-content: center;
+}
+@media (max-width: 1199.98px) and (min-width: 992px) {
+  .new-year__inner {
+    transform: translateY(30%) scale(0.8);
+  }
+}
+@media (max-width: 991.98px) and (min-width: 768px) {
+  .new-year__inner {
+    transform: translateY(35%) scale(0.6);
+  }
+}
+@media (max-width: 767.98px) and (min-width: 576px) {
+  .new-year__inner {
+    transform: translateY(37.5%) scale(0.5);
+  }
+}
+@media (max-width: 575.98px) {
+  .new-year__inner {
+    transform: translateY(41%) scale(0.3);
+  }
 }
 .new-year__branch {
   z-index: 1;
@@ -22,7 +53,7 @@
   width: 420px;
   height: 129px;
   margin: 0 -15px;
-  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0.0095456181s infinite;
+  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0.6422853999s infinite;
   background-image: url("../new-year/05.png");
 }
 .new-year__branch_right {
@@ -33,12 +64,15 @@
   width: 101px;
   height: 60px;
   margin: 0 -30px 40px;
-  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0.0095456181s infinite;
+  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0.6422853999s infinite;
   background-image: url("../new-year/06.png");
 }
 .new-year__toy {
   z-index: 3;
   position: absolute;
+}
+.new-year__toy_hat {
+  pointer-events: all;
 }
 .new-year__toy_hat > * {
   width: 149px;
@@ -58,6 +92,9 @@
 }
 .new-year__toy_hat-03 {
   transform: translate(-1030px, -65px) scale(0.6) rotate(-40deg);
+}
+.new-year__toy_present {
+  pointer-events: all;
 }
 .new-year__toy_present > * {
   width: 145px;
@@ -81,6 +118,9 @@
 .new-year__toy_present-04 {
   transform: translate(-1200px, -65px) scale(0.4) rotate(-3deg);
 }
+.new-year__toy_candy {
+  pointer-events: all;
+}
 .new-year__toy_candy > * {
   width: 106px;
   height: 161px;
@@ -103,58 +143,55 @@
 .new-year__toy_candy-04 {
   transform: translate(-860px, -55px) scale(0.5) rotate(35deg);
 }
-.new-year__toy_branch {
-  pointer-events: none;
-}
 .new-year__toy_branch > * {
   width: 205px;
   height: 104px;
   margin: 0 -15px;
   position: absolute;
-  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0.0095456181s infinite;
+  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0.6422853999s infinite;
   background-image: url("../new-year/04.png");
 }
 .new-year__toy_branch-01 {
   transform: translate(-590px, -50px);
 }
 .new-year__toy_branch-01 > * {
-  animation-delay: 0.2077508699s;
+  animation-delay: 1.077217516s;
 }
 .new-year__toy_branch-02 {
   transform: translate(-420px, -10px) rotate(-10deg);
 }
 .new-year__toy_branch-02 > * {
-  animation-delay: 1.9485178726s;
+  animation-delay: 0.2347194353s;
 }
 .new-year__toy_branch-03 {
   transform: translate(-880px, -10px) rotate(-10deg);
 }
 .new-year__toy_branch-03 > * {
-  animation-delay: 0.082462503s;
+  animation-delay: 0.868474681s;
 }
 .new-year__toy_branch-04 {
   transform: translate(-960px, -50px) rotate(25deg);
 }
 .new-year__toy_branch-04 > * {
-  animation-delay: 0.1802165695s;
+  animation-delay: 1.1577237567s;
 }
 .new-year__toy_branch-05 {
   transform: translate(300px, -30px) scaleX(-1);
 }
 .new-year__toy_branch-05 > * {
-  animation-delay: 1.3371448424s;
+  animation-delay: 1.3892787476s;
 }
 .new-year__toy_branch-06 {
   transform: translate(620px, -40px) scaleX(-1);
 }
 .new-year__toy_branch-06 > * {
-  animation-delay: 0.8016203628s;
+  animation-delay: 1.7680965092s;
 }
 .new-year__toy_branch-07 {
   transform: translate(910px, -40px) scaleX(-1) rotate(5deg);
 }
 .new-year__toy_branch-07 > * {
-  animation-delay: 0.0707348917s;
+  animation-delay: 0.3518198472s;
 }
 
 @keyframes branch {

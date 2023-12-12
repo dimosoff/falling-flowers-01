@@ -35,13 +35,34 @@ $present-animation: present 1.8s cubic-bezier(0.28, 0.84, 0.42, 1);
 .new-year {
   left: 0;
   right: 0;
-  // bottom: 0;
-  bottom: -50px;
-  display: flex;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
   position: absolute;
-  align-items: center;
-  justify-content: center;
+  user-select: none;
+  pointer-events: none;
 
+  &__inner {
+    display: flex;
+    padding: 100px 0 0;
+    transform: translateY(25%);
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 1199.98px) and (min-width: 992px) {
+      transform: translateY(30%) scale(0.8);
+    }
+    @media (max-width: 991.98px) and (min-width: 768px) {
+      transform: translateY(35%) scale(0.6);
+    }
+    @media (max-width: 767.98px) and (min-width: 576px) {
+      transform: translateY(37.5%) scale(0.5);
+    }
+    @media (max-width: 575.98px) {
+      transform: translateY(41%) scale(0.3);
+    }
+  }
   &__branch {
     z-index: 1;
     position: relative;
@@ -74,6 +95,8 @@ $present-animation: present 1.8s cubic-bezier(0.28, 0.84, 0.42, 1);
     position: absolute;
 
     &_hat {
+      pointer-events: all;
+
       > * {
         width: map-get($f-newyear, f1-w);
         height: map-get($f-newyear, f1-h);
@@ -98,6 +121,8 @@ $present-animation: present 1.8s cubic-bezier(0.28, 0.84, 0.42, 1);
       }
     }
     &_present {
+      pointer-events: all;
+
       > * {
         width: map-get($f-newyear, f2-w);
         height: map-get($f-newyear, f2-h);
@@ -125,6 +150,8 @@ $present-animation: present 1.8s cubic-bezier(0.28, 0.84, 0.42, 1);
       }
     }
     &_candy {
+      pointer-events: all;
+
       > * {
         width: map-get($f-newyear, f3-w);
         height: map-get($f-newyear, f3-h);
@@ -152,8 +179,6 @@ $present-animation: present 1.8s cubic-bezier(0.28, 0.84, 0.42, 1);
       }
     }
     &_branch {
-      pointer-events: none;
-
       > * {
         width: map-get($f-newyear, f4-w);
         height: map-get($f-newyear, f4-h);

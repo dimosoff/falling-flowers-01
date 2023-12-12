@@ -14,7 +14,7 @@
   .efe__falling > div:nth-child(#{$number}) {
     opacity: calc(random() / 2 + 0.5);
     transform: translate(
-        #{calc($position + random(20) - 10 - $wind)}vw,
+        #{calc($position + random(20) - 10 - $wind)}em,
         calc($element-size * -2)
       )
       scale($scale) rotate(#{calc(random(360) - 180)}deg);
@@ -23,12 +23,12 @@
   }
   @include keyframe($number) {
     #{random(30) + 35}% {
-      transform: translate(#{calc($position + random(20) - 10)}vw, #{$top}vh)
+      transform: translate(#{calc($position + random(20) - 10)}em, #{$top}vh)
         scale($scale) rotate(#{calc(random(360) - 180)}deg);
     }
     to {
       transform: translate(
-          #{calc($position + random(20) - 10 + $wind)}vw,
+          #{calc($position + random(20) - 10 + $wind)}em,
           100vh
         )
         scale($scale) rotate(#{calc(random(360) - 180)}deg);
