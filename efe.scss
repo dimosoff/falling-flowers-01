@@ -1,0 +1,49 @@
+@import "_utility";
+
+$element-size: 20px;
+.efe {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  position: absolute;
+  user-select: none;
+  pointer-events: none;
+
+  &__falling {
+    & > div {
+      position: absolute;
+      width: $element-size;
+      height: $element-size;
+      background: url("../falling/snowflake-01.png") center / contain no-repeat
+        transparent;
+
+      $flakesCount: 4;
+      @for $i from 1 to $flakesCount {
+        &:nth-child(#{$flakesCount}n + #{$i}) {
+          background-image: url("../falling/snowflake-0#{$i}.png");
+        }
+      }
+    }
+  }
+  &__header {
+    display: flex;
+    transform: translateY(-60%);
+    align-items: center;
+    justify-content: center;
+
+    & > div {
+      flex-shrink: 0;
+      transform-origin: center top;
+    }
+  }
+}
+
+@for $i from 1 to 101 {
+  @include fallingAnimation01($i);
+}
+
+@for $j from 1 to 51 {
+  @include flowerHeading($j);
+}
