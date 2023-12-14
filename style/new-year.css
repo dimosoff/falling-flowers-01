@@ -11,6 +11,7 @@
   bottom: 0;
   margin: 0;
   padding: 0;
+  z-index: 100;
   position: fixed;
   overflow: hidden;
   -webkit-user-select: none;
@@ -25,24 +26,19 @@
   align-items: center;
   justify-content: center;
 }
-@media (max-width: 1199.98px) and (min-width: 992px) {
+@media (max-width: 1199.98px) and (min-width: 768px) {
   .new-year__inner {
     transform: translateY(30%) scale(0.8);
   }
 }
-@media (max-width: 991.98px) and (min-width: 768px) {
+@media (max-width: 767.98px) and (min-width: 576px) {
   .new-year__inner {
     transform: translateY(35%) scale(0.6);
   }
 }
-@media (max-width: 767.98px) and (min-width: 576px) {
-  .new-year__inner {
-    transform: translateY(37.5%) scale(0.5);
-  }
-}
 @media (max-width: 575.98px) {
   .new-year__inner {
-    transform: translateY(41%) scale(0.3);
+    transform: translateY(37.5%) scale(0.45);
   }
 }
 .new-year__branch {
@@ -53,7 +49,7 @@
   width: 420px;
   height: 129px;
   margin: 0 -15px;
-  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 1.9592045969s infinite;
+  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0.9591387571s infinite;
   background-image: url("../new-year/05.png");
 }
 .new-year__branch_right {
@@ -64,7 +60,7 @@
   width: 101px;
   height: 60px;
   margin: 0 -30px 40px;
-  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 1.9592045969s infinite;
+  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0.9591387571s infinite;
   background-image: url("../new-year/06.png");
 }
 .new-year__toy {
@@ -82,7 +78,7 @@
   background-image: url("../new-year/01.png");
 }
 .new-year__toy_hat.animate > * {
-  animation: present 1.8s cubic-bezier(0.28, 0.84, 0.42, 1);
+  animation: present 1.4s cubic-bezier(0.28, 0.84, 0.42, 1);
 }
 .new-year__toy_hat-01 {
   transform: translate(550px, -85px) scale(0.6) rotate(9deg);
@@ -104,7 +100,7 @@
   background-image: url("../new-year/02.png");
 }
 .new-year__toy_present.animate > * {
-  animation: present 1.8s cubic-bezier(0.28, 0.84, 0.42, 1);
+  animation: present 1.4s cubic-bezier(0.28, 0.84, 0.42, 1);
 }
 .new-year__toy_present-01 {
   transform: translate(160px, -65px) scale(0.7) rotate(12deg);
@@ -129,7 +125,7 @@
   background-image: url("../new-year/03.png");
 }
 .new-year__toy_candy.animate > * {
-  animation: present 1.8s cubic-bezier(0.28, 0.84, 0.42, 1);
+  animation: present 1.4s cubic-bezier(0.28, 0.84, 0.42, 1);
 }
 .new-year__toy_candy-01 {
   transform: translate(430px, -55px) scale(0.8) rotate(0deg);
@@ -148,50 +144,50 @@
   height: 104px;
   margin: 0 -15px;
   position: absolute;
-  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 1.9592045969s infinite;
+  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0.9591387571s infinite;
   background-image: url("../new-year/04.png");
 }
 .new-year__toy_branch-01 {
   transform: translate(-590px, -50px);
 }
 .new-year__toy_branch-01 > * {
-  animation-delay: 1.1474487709s;
+  animation-delay: 0.6956986449s;
 }
 .new-year__toy_branch-02 {
   transform: translate(-420px, -10px) rotate(-10deg);
 }
 .new-year__toy_branch-02 > * {
-  animation-delay: 1.7383468526s;
+  animation-delay: 0.8133989669s;
 }
 .new-year__toy_branch-03 {
   transform: translate(-880px, -10px) rotate(-10deg);
 }
 .new-year__toy_branch-03 > * {
-  animation-delay: 0.1158396121s;
+  animation-delay: 1.9736341345s;
 }
 .new-year__toy_branch-04 {
   transform: translate(-960px, -50px) rotate(25deg);
 }
 .new-year__toy_branch-04 > * {
-  animation-delay: 1.0879947768s;
+  animation-delay: 1.1993629585s;
 }
 .new-year__toy_branch-05 {
   transform: translate(300px, -30px) scaleX(-1);
 }
 .new-year__toy_branch-05 > * {
-  animation-delay: 1.8344779953s;
+  animation-delay: 0.9998125684s;
 }
 .new-year__toy_branch-06 {
   transform: translate(620px, -40px) scaleX(-1);
 }
 .new-year__toy_branch-06 > * {
-  animation-delay: 1.8244465734s;
+  animation-delay: 0.5186568218s;
 }
 .new-year__toy_branch-07 {
   transform: translate(910px, -40px) scaleX(-1) rotate(5deg);
 }
 .new-year__toy_branch-07 > * {
-  animation-delay: 1.0793063789s;
+  animation-delay: 0.2650714248s;
 }
 
 @keyframes branch {
@@ -215,17 +211,14 @@
   0% {
     transform: translateY(0);
   }
-  10% {
+  15% {
     transform: translateY(0) scale(1.2, 0.8);
   }
-  20% {
+  30% {
     transform: translateY(0) scale(0.8, 1.2);
   }
-  50% {
+  60% {
     transform: translateY(-80px) scale(1);
-  }
-  80% {
-    transform: translateY(0) scale(1);
   }
   100% {
     transform: translateY(0);

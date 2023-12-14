@@ -1,0 +1,483 @@
+%present {
+  display: block;
+  background: none center / contain no-repeat transparent;
+}
+%sr-only {
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  border: 0;
+  padding: 0;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+}
+
+$cubic: cubic-bezier(0.28, 0.84, 0.42, 1);
+
+@font-face {
+  font-display: swap;
+  font-family: "Myra";
+  font-style: normal;
+  font-weight: 700;
+  src: local("☺"), url("../fonts/Myra-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/montserrat-v26-cyrillic_latin-regular.woff2")
+    format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 800;
+  src: url("../fonts/montserrat-v26-cyrillic_latin-800.woff2") format("woff2");
+}
+
+.floating-present {
+  left: 85px;
+  bottom: 130px;
+  border: none;
+  cursor: pointer;
+  filter: drop-shadow(0 0 0px rgba(255, 244, 195, 0));
+  position: fixed;
+  animation: floating-present 1.6s $cubic infinite;
+  transition: filter 0.5s $cubic;
+  background-color: transparent;
+
+  @media (min-width: 1200px) {
+    &:hover {
+      filter: drop-shadow(0 0 20px rgba(255, 244, 195, 0.5));
+    }
+  }
+
+  &.opened {
+    pointer-events: none;
+    animation-play-state: paused;
+    animation-iteration-count: 1;
+
+    @extend %opened !optional;
+  }
+
+  &__cap {
+    top: -35px;
+    left: -1px;
+    width: 106px;
+    height: 63px;
+    z-index: 3;
+    @extend %present;
+    position: absolute;
+    filter: drop-shadow(0 5px 0 rgba(0, 0, 0, 0.15));
+    transform: translateY(0);
+    transition: transform 0.3s $cubic, filter 0.3s $cubic;
+    background-image: url("../new-year/07.png");
+
+    %opened & {
+      transform: translateY(-40px);
+      filter: drop-shadow(0 5px 0 rgba(0, 0, 0, 0));
+    }
+  }
+  &__box {
+    width: 104px;
+    height: 77px;
+    z-index: 2;
+    @extend %present;
+    position: relative;
+    background-image: url("../new-year/08.png");
+  }
+  &__box-back {
+    top: -10px;
+    left: 2px;
+    width: 102px;
+    height: 57px;
+    z-index: 1;
+    @extend %present;
+    position: absolute;
+    background-image: url("../new-year/08-1.png");
+
+    &::before {
+      left: 0;
+      right: 0;
+      bottom: 12px;
+      filter: blur(1px);
+      opacity: 0;
+      content: "";
+      display: block;
+      position: absolute;
+      transform: scale(0.9, 1.2) rotate(42deg);
+      animation: floating-present-light 2.5s $cubic infinite;
+      background: radial-gradient(
+          circle at right bottom,
+          #fff 20%,
+          rgba(255, 246, 163, 0.9) 30%,
+          rgba(255, 251, 192, 0.3) 45%,
+          rgba(255, 251, 192, 0.1) 55%,
+          rgba(165, 154, 0, 0) 66%
+        )
+        0 0 / 100% 100% no-repeat transparent;
+      transition: opacity 0.3s $cubic;
+      padding-bottom: 100%;
+      pointer-events: none;
+
+      %opened & {
+        opacity: 1;
+      }
+    }
+  }
+  &__title {
+    @extend %sr-only;
+  }
+}
+.present-popup {
+  color: #666;
+  margin: 0 auto;
+  font-size: 16px;
+  max-width: 806px;
+  text-align: center;
+  font-weight: 400;
+  line-height: normal;
+  font-family: "Montserrat", sans-serif;
+
+  @media (max-width: 767.98px) {
+    font-size: 14px;
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    content: "";
+    display: block;
+    position: absolute;
+    animation: floating-present-background 20s linear infinite;
+    background: url("../new-year/background.png") center top / auto 600px
+      repeat-y transparent;
+  }
+  &::after {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    content: "";
+    opacity: 1;
+    display: block;
+    position: absolute;
+    background: radial-gradient(ellipse at center, #fff 50%, transparent 80%)
+      center / 100% no-repeat transparent;
+  }
+
+  > * {
+    z-index: 3;
+    position: relative;
+  }
+
+  &__title {
+    color: transparent;
+    margin: 0 auto 12px;
+    display: flex;
+    position: relative;
+    font-size: 40px;
+    max-width: 700px;
+    text-align: center;
+    line-height: 1.1;
+    font-weight: 700;
+    line-height: normal;
+    font-family: "Myra", sans-serif;
+    -webkit-text-stroke: 4px #020202;
+
+    @media (max-width: 767.98px) and (min-width: 576px) {
+      font-size: 30px;
+    }
+    @media (max-width: 575.98px) {
+      font-size: 22px;
+    }
+
+    &::after,
+    &::before {
+      top: 0;
+      color: transparent;
+      z-index: 1;
+      display: block;
+      content: attr(data-shadow-text);
+      position: absolute;
+      background: linear-gradient(to bottom, #1abc85 50%, #ff4343 50%) top left /
+        100% 88px repeat-y text transparent;
+
+      @media (max-width: 767.98px) and (min-width: 576px) {
+        background-size: 100% 66px;
+      }
+      @media (max-width: 575.98px) {
+        background-size: 100% 48.4px;
+      }
+    }
+    &::before {
+      z-index: 2;
+      -webkit-text-stroke: 0;
+      -webkit-text-fill-color: transparent;
+    }
+    &::after {
+      z-index: 1;
+      transform: translateX(3px);
+      -webkit-text-stroke: 2px #020202;
+      -webkit-text-fill-color: #020202;
+    }
+  }
+  &__subtitle {
+    color: #fff;
+    padding: 5px 30px;
+    display: inline-block;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 800;
+    line-height: normal;
+    word-spacing: 0.5em;
+    border-radius: 5px;
+    letter-spacing: 0.56em;
+    text-transform: uppercase;
+    background-color: #020202;
+
+    @media (max-width: 767.98px) {
+      padding: 5px 20px;
+      font-size: 14px;
+      word-spacing: 0.3em;
+      letter-spacing: 0.26em;
+    }
+  }
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin-left: -30px;
+    margin-bottom: -30px;
+    justify-content: center;
+
+    @media (max-width: 767.98px) {
+      margin-left: -17px;
+      margin-bottom: -17px;
+    }
+  }
+  &__item {
+    flex: 1 1 0%;
+    max-width: 100%;
+    padding-left: 30px;
+    margin-bottom: 30px;
+
+    &_card {
+      max-width: 29.53%;
+      flex-basis: 29.53%;
+    }
+
+    @media (max-width: 767.98px) {
+      flex-basis: 100%;
+      padding-left: 17px;
+      margin-bottom: 17px;
+
+      &_card {
+        max-width: 208px;
+        flex-basis: 50%;
+      }
+    }
+  }
+  &__card {
+    width: 100%;
+    animation: floating-present-card 1s $cubic infinite;
+    perspective: 400px;
+    padding-bottom: 131.73%;
+
+    &::before,
+    &::after {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      content: "";
+      display: block;
+      position: absolute;
+      transform: rotateY(0) translateZ(1px);
+      transition: transform 0.8s $cubic;
+      background: none center / contain no-repeat transparent;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+    }
+    &::after {
+      transform: rotateY(-180deg) translateZ(-1px);
+    }
+
+    &.hovered {
+      pointer-events: none;
+      animation-play-state: paused;
+      animation-iteration-count: 1;
+
+      &::before {
+        transform: rotateY(180deg) translateZ(1px);
+      }
+      &::after {
+        transform: rotateY(0deg) translateZ(-1px);
+      }
+
+      @extend %card-hover !optional;
+    }
+
+    &_01 {
+      &::before {
+        background-image: url("../new-year/card-01.png");
+      }
+      &::after {
+        background-image: url("../new-year/card-01-1.png");
+      }
+    }
+    &_02 {
+      animation-delay: 0.1s;
+
+      &::before {
+        background-image: url("../new-year/card-02.png");
+      }
+      &::after {
+        background-image: url("../new-year/card-02-1.png");
+      }
+    }
+  }
+  &__form {
+    text-align: left;
+
+    input {
+      width: 100%;
+      color: #020202;
+      border: 2px solid #020202;
+      padding: 10px 20px;
+      font-size: inherit;
+      font-weight: 400;
+      font-family: inherit;
+      border-radius: 10px;
+      background-color: #fff;
+    }
+    p {
+      color: #666;
+      flex-grow: 1;
+      font-weight: 400;
+    }
+    button {
+      color: #fff;
+      border: 0;
+      cursor: pointer;
+      padding: 15px 30px;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      font-family: inherit;
+      border-radius: 10px;
+      background-color: #020202;
+
+      @media (min-width: 1200px) {
+        transform: translateY(0);
+        transition: transform 0.2s $cubic;
+
+        &:hover {
+          transform: translateY(-3px);
+        }
+      }
+    }
+  }
+  &__form-inner {
+    display: flex;
+    margin-left: -17px;
+    margin-bottom: -17px;
+    flex-direction: column;
+
+    > * {
+      margin-left: 17px;
+      margin-bottom: 17px;
+    }
+  }
+  &__bottom {
+    color: #666;
+    font-size: inherit;
+    margin-top: 2.5em;
+    font-weight: 400;
+    line-height: normal;
+
+    > * + * {
+      margin-top: 7px;
+    }
+    span {
+      color: #ff4343;
+    }
+  }
+}
+.sr-only {
+  @extend %sr-only;
+}
+
+@keyframes floating-present-light {
+  0%,
+  100% {
+    background-position: 0 0;
+  }
+  10% {
+    background-position: 5px 5px;
+  }
+  30% {
+    background-position: 0px 0px;
+  }
+  50% {
+    background-position: 5px 5px;
+  }
+  60% {
+    background-position: 2px 2px;
+  }
+  70% {
+    background-position: 4px 4px;
+  }
+}
+@keyframes floating-present {
+  0%,
+  50% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(-5deg);
+  }
+  25% {
+    transform: rotate(4deg);
+  }
+  35% {
+    transform: rotate(-2deg);
+  }
+  45% {
+    transform: rotate(1deg);
+  }
+}
+@keyframes floating-present-card {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-1.5deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
+  75% {
+    transform: rotate(-0.5deg);
+  }
+  100% {
+    transform: rotate(0.4deg);
+  }
+}
+@keyframes floating-present-background {
+  0% {
+    background-position: center 0px;
+  }
+  100% {
+    background-position: center 600px;
+  }
+}
