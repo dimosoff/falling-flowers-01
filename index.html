@@ -25,7 +25,7 @@
     body {
       height: 100vh;
       overflow: hidden;
-      background: linear-gradient(to left, #ddd 50%, #333 50%);
+      background: linear-gradient(to left, #333 50%, #ddd 50%);
     }
     .modal {
       top: 0;
@@ -287,7 +287,7 @@
     <span class="floating-present__box"></span>
     <span class="floating-present__title">Получить подарок</span>
   </button>
-  <div class="modal">
+  <div class="modal" data-present-hide="">
     <div class="modal__inner">
       <div class="present-popup">
         <p class="present-popup__title" data-shadow-text="Мы Подготовили Новогодние&nbsp;Подарки Для Вас!"
@@ -313,7 +313,7 @@
                 </label>
                 <p>Мы не передадим ваш телефон третьим лицам, только позвоним и подробно
                   проконсультируем по всем вопросам, которые действительно для Вас важны.</p>
-                <button type="submit">Получить подарки</button>
+                <button type="button">Получить подарки</button>
               </div>
             </form>
           </div>

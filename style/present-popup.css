@@ -39,19 +39,32 @@
   src: url("../fonts/montserrat-v26-cyrillic_latin-800.woff2") format("woff2");
 }
 .floating-present {
-  left: 85px;
-  bottom: 130px;
+  left: 4.5%;
+  bottom: 15.5%;
   border: none;
   cursor: pointer;
-  filter: drop-shadow(0 0 0px rgba(255, 244, 195, 0));
+  filter: drop-shadow(0 0 0px rgba(255, 215, 38, 0.3));
+  z-index: 100;
   position: fixed;
+  font-size: 100px;
+  transform: translateX(0);
   animation: floating-present 1.6s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
-  transition: filter 0.5s cubic-bezier(0.28, 0.84, 0.42, 1);
+  transition: filter 0.5s cubic-bezier(0.28, 0.84, 0.42, 1), transform 0.5s cubic-bezier(0.28, 0.84, 0.42, 1);
   background-color: transparent;
 }
 @media (min-width: 1200px) {
   .floating-present:hover {
-    filter: drop-shadow(0 0 20px rgba(255, 244, 195, 0.5));
+    filter: drop-shadow(0 0 20px rgba(255, 215, 38, 0.5));
+  }
+}
+@media (max-width: 1199.98px) and (min-width: 768px) {
+  .floating-present {
+    font-size: 80px;
+  }
+}
+@media (max-width: 767.98px) {
+  .floating-present {
+    font-size: 60px;
   }
 }
 .floating-present.opened {
@@ -59,11 +72,25 @@
   animation-play-state: paused;
   animation-iteration-count: 1;
 }
+.floating-present.hide {
+  animation: none;
+  transform: translateX(-100%) translateX(-4.5vw) scale(0.8);
+}
+.floating-present::before {
+  top: -0.4em;
+  left: -0.07em;
+  right: -0.08em;
+  bottom: -0.04em;
+  content: "";
+  position: absolute;
+  animation: floating-present-stroke 1.4s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
+  background: url("../new-year/stroke.png") center/100% 100% no-repeat transparent;
+}
 .floating-present__cap {
-  top: -35px;
-  left: -1px;
-  width: 106px;
-  height: 63px;
+  top: -0.35em;
+  left: -0.01em;
+  width: 1.06em;
+  height: 0.63em;
   z-index: 3;
   position: absolute;
   filter: drop-shadow(0 5px 0 rgba(0, 0, 0, 0.15));
@@ -72,21 +99,21 @@
   background-image: url("../new-year/07.png");
 }
 .floating-present.opened .floating-present__cap {
-  transform: translateY(-40px);
+  transform: translateY(-0.4em);
   filter: drop-shadow(0 5px 0 rgba(0, 0, 0, 0));
 }
 .floating-present__box {
-  width: 104px;
-  height: 77px;
+  width: 1.04em;
+  height: 0.77em;
   z-index: 2;
   position: relative;
   background-image: url("../new-year/08.png");
 }
 .floating-present__box-back {
-  top: -10px;
-  left: 2px;
-  width: 102px;
-  height: 57px;
+  top: -0.1em;
+  left: 0.02em;
+  width: 1.02em;
+  height: 0.57em;
   z-index: 1;
   position: absolute;
   background-image: url("../new-year/08-1.png");
@@ -166,6 +193,7 @@
   line-height: normal;
   font-family: "Myra", sans-serif;
   -webkit-text-stroke: 4px #020202;
+  -webkit-text-fill-color: transparent;
 }
 @media (max-width: 767.98px) and (min-width: 576px) {
   .present-popup__title {
@@ -184,7 +212,9 @@
   display: block;
   content: attr(data-shadow-text);
   position: absolute;
-  background: linear-gradient(to bottom, #1abc85 50%, #ff4343 50%) top left/100% 88px repeat-y text transparent;
+  background: linear-gradient(to bottom, #1abc85 50%, #ff4343 50%) top left/100% 88px repeat-y transparent;
+  -webkit-background-clip: text;
+          background-clip: text;
 }
 @media (max-width: 767.98px) and (min-width: 576px) {
   .present-popup__title::after, .present-popup__title::before {
@@ -216,6 +246,7 @@
   font-weight: 800;
   line-height: normal;
   word-spacing: 0.5em;
+  margin-bottom: 0;
   border-radius: 5px;
   letter-spacing: 0.56em;
   text-transform: uppercase;
@@ -353,6 +384,9 @@
     transform: translateY(-3px);
   }
 }
+.present-popup__form ._org {
+  position: absolute;
+}
 .present-popup__form-inner {
   display: flex;
   margin-left: -17px;
@@ -437,5 +471,23 @@
   }
   100% {
     background-position: center 600px;
+  }
+}
+@keyframes floating-present-stroke {
+  0%, 100% {
+    opacity: 0.95;
+    transform: scale(1);
+  }
+  40% {
+    opacity: 0.65;
+    transform: scale(1.1);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(0.99);
+  }
+  90% {
+    opacity: 0.85;
+    transform: scale(1.03);
   }
 }
