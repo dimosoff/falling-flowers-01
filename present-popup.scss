@@ -401,7 +401,7 @@ $cubic: cubic-bezier(0.28, 0.84, 0.42, 1);
     z-index: 1;
     display: block;
     position: absolute;
-    max-width: 75%;
+    max-width: 70%;
     font-size: 20px;
     transform: scaleX(-1) translateZ(-15px) rotate(-37deg);
     text-align: left;
@@ -414,11 +414,20 @@ $cubic: cubic-bezier(0.28, 0.84, 0.42, 1);
       font-weight: 900;
       text-transform: uppercase;
     }
+
+    @media (max-width: 900px) and (min-width: 420px) {
+      right: 15%;
+      font-size: 18px;
+    }
+    @media (max-width: 419.98px) {
+      top: 12%;
+      font-size: 14px;
+    }
   }
   &__discount-percent {
     left: 11%;
     color: #fff8dc;
-    bottom: 7%;
+    bottom: 10%;
     z-index: 1;
     display: block;
     position: absolute;
@@ -426,6 +435,13 @@ $cubic: cubic-bezier(0.28, 0.84, 0.42, 1);
     transform: scaleX(-1) translateZ(-30px);
     line-height: 1;
     font-weight: 700;
+
+    @media (max-width: 900px) and (min-width: 420px) {
+      font-size: 54px;
+    }
+    @media (max-width: 419.98px) {
+      font-size: 40px;
+    }
   }
   &__form {
     text-align: left;

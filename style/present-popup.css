@@ -359,7 +359,7 @@
   z-index: 1;
   display: block;
   position: absolute;
-  max-width: 75%;
+  max-width: 70%;
   font-size: 20px;
   transform: scaleX(-1) translateZ(-15px) rotate(-37deg);
   text-align: left;
@@ -372,10 +372,22 @@
   font-weight: 900;
   text-transform: uppercase;
 }
+@media (max-width: 900px) and (min-width: 420px) {
+  .present-popup__discount-title {
+    right: 15%;
+    font-size: 18px;
+  }
+}
+@media (max-width: 419.98px) {
+  .present-popup__discount-title {
+    top: 12%;
+    font-size: 14px;
+  }
+}
 .present-popup__discount-percent {
   left: 11%;
   color: #fff8dc;
-  bottom: 7%;
+  bottom: 10%;
   z-index: 1;
   display: block;
   position: absolute;
@@ -383,6 +395,16 @@
   transform: scaleX(-1) translateZ(-30px);
   line-height: 1;
   font-weight: 700;
+}
+@media (max-width: 900px) and (min-width: 420px) {
+  .present-popup__discount-percent {
+    font-size: 54px;
+  }
+}
+@media (max-width: 419.98px) {
+  .present-popup__discount-percent {
+    font-size: 40px;
+  }
 }
 .present-popup__form {
   text-align: left;
