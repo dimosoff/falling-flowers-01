@@ -68,14 +68,16 @@ $cubic: cubic-bezier(0.28, 0.84, 0.42, 1);
 
   &.opened {
     pointer-events: none;
-    animation-play-state: paused;
-    animation-iteration-count: 1;
+    animation-iteration-count: 0;
 
     @extend %opened !optional;
   }
   &.hide {
-    animation: none;
     transform: translateX(-100%) translateX(-4.5vw) scale(0.8);
+    pointer-events: none;
+    animation-iteration-count: 0;
+
+    @extend %hide !optional;
   }
 
   &::before {
@@ -83,11 +85,20 @@ $cubic: cubic-bezier(0.28, 0.84, 0.42, 1);
     left: -0.07em;
     right: -0.08em;
     bottom: -0.04em;
+    opacity: 1;
     content: "";
     position: absolute;
     animation: floating-present-stroke 1.4s $cubic infinite;
     background: url("../new-year/stroke.png") center / 100% 100% no-repeat
       transparent;
+    transition: opacity 0.3s;
+    filter: drop-shadow(0 0 3px #ffb817);
+
+    &%opened,
+    &%hide {
+      opacity: 0;
+      animation-iteration-count: 0;
+    }
   }
 
   &__cap {
@@ -271,7 +282,7 @@ $cubic: cubic-bezier(0.28, 0.84, 0.42, 1);
     border-radius: 5px;
     letter-spacing: 0.56em;
     text-transform: uppercase;
-    background-color: #020202;
+    background-color: #0067ff;
 
     @media (max-width: 767.98px) {
       padding: 5px 20px;
@@ -302,6 +313,7 @@ $cubic: cubic-bezier(0.28, 0.84, 0.42, 1);
     &_card {
       max-width: 29.53%;
       flex-basis: 29.53%;
+      perspective: 800px;
     }
 
     @media (max-width: 767.98px) {
@@ -320,6 +332,32 @@ $cubic: cubic-bezier(0.28, 0.84, 0.42, 1);
     animation: floating-present-card 1s $cubic infinite;
     perspective: 400px;
     padding-bottom: 131.73%;
+    transform-style: preserve-3d;
+
+    &.hovered {
+      animation: floating-present-card-flipped 3s cubic-bezier(.5,0,.5,1) infinite;
+      pointer-events: none;
+      // animation-iteration-count: 0;
+
+      @extend %card-hover !optional;
+    }
+
+    &_01 {
+      @extend %card-01 !optional;
+    }
+    &_02 {
+      @extend %card-02 !optional;
+    }
+  }
+  &__card-inner {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    transform: rotateY(0);
+    transition: transform 0.8s $cubic;
+    transform-style: preserve-3d;
 
     &::before,
     &::after {
@@ -331,48 +369,63 @@ $cubic: cubic-bezier(0.28, 0.84, 0.42, 1);
       display: block;
       position: absolute;
       transform: rotateY(0) translateZ(1px);
-      transition: transform 0.8s $cubic;
       background: none center / contain no-repeat transparent;
-      transform-style: preserve-3d;
       backface-visibility: hidden;
     }
     &::after {
       transform: rotateY(-180deg) translateZ(-1px);
+      background-image: url("../new-year/card-rear.png");
     }
 
-    &.hovered {
-      pointer-events: none;
-      animation-play-state: paused;
-      animation-iteration-count: 1;
-
-      &::before {
-        transform: rotateY(180deg) translateZ(1px);
-      }
-      &::after {
-        transform: rotateY(0deg) translateZ(-1px);
-      }
-
-      @extend %card-hover !optional;
+    %card-hover & {
+      transform: rotateY(180deg);
     }
 
-    &_01 {
+    %card-01 & {
       &::before {
         background-image: url("../new-year/card-01.png");
       }
-      &::after {
-        background-image: url("../new-year/card-01-1.png");
-      }
     }
-    &_02 {
+    %card-02 & {
       animation-delay: 0.1s;
 
       &::before {
         background-image: url("../new-year/card-02.png");
       }
-      &::after {
-        background-image: url("../new-year/card-02-1.png");
-      }
     }
+  }
+  &__discount-title {
+    top: 17%;
+    right: 20%;
+    color: #fff8dc;
+    z-index: 1;
+    display: block;
+    position: absolute;
+    max-width: 75%;
+    font-size: 20px;
+    transform: scaleX(-1) translateZ(-15px) rotate(-37deg);
+    text-align: left;
+    line-height: 1;
+    font-weight: 600;
+
+    span {
+      color: #ff4343;
+      display: block;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+  }
+  &__discount-percent {
+    left: 11%;
+    color: #fff8dc;
+    bottom: 7%;
+    z-index: 1;
+    display: block;
+    position: absolute;
+    font-size: 68.82px;
+    transform: scaleX(-1) translateZ(-30px);
+    line-height: 1;
+    font-weight: 700;
   }
   &__form {
     text-align: left;
@@ -403,7 +456,7 @@ $cubic: cubic-bezier(0.28, 0.84, 0.42, 1);
       font-weight: 700;
       font-family: inherit;
       border-radius: 10px;
-      background-color: #020202;
+      background-color: #0067ff;
 
       @media (min-width: 1200px) {
         transform: translateY(0);
@@ -513,7 +566,8 @@ $cubic: cubic-bezier(0.28, 0.84, 0.42, 1);
   }
 }
 @keyframes floating-present-stroke {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.95;
     transform: scale(1);
   }
@@ -528,5 +582,16 @@ $cubic: cubic-bezier(0.28, 0.84, 0.42, 1);
   90% {
     opacity: 0.85;
     transform: scale(1.03);
+  }
+}
+@keyframes floating-present-card-flipped {
+  0% {
+    transform: rotateY(5deg);
+  }
+  50% {
+    transform: rotateY(-5deg);
+  }
+  100% {
+    transform: rotateY(5deg);
   }
 }

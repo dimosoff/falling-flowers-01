@@ -19,14 +19,38 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     html {
       font-size: 16px;
     }
+
     body {
       height: 100vh;
       overflow: hidden;
-      background: linear-gradient(to left, #333 50%, #ddd 50%);
+      /* background: linear-gradient(to left, #333 50%, #ddd 50%); */
+      /* background: radial-gradient(#fff 0%, #0067ff 100%); */
+      background: radial-gradient(#0067ff 0%, #0067ff 100%);
     }
+
+    body::before {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      content: "";
+      display: block;
+      position: absolute;
+      transition: opacity 2.5s cubic-bezier(0, 1, 0, 1), transform 2.5s cubic-bezier(.39, .49, .29, 1.2);
+      transform: scale(0.1);
+      background: url("logo-white.svg") center / 400px auto no-repeat transparent;
+    }
+
+    body.show-logo::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+
     .modal {
       top: 0;
       left: 0;
@@ -34,24 +58,81 @@
       bottom: 0;
       opacity: 0;
       z-index: 150;
+      padding: 3rem;
       display: flex;
       position: fixed;
+      overflow-y: auto;
       visibility: hidden;
+      overflow-x: hidden;
       transition: opacity 0.3s, visibility 0.3s;
       align-items: center;
       justify-content: center;
-      background-color: rgba(0,0,0,0.4);
+      background-color: rgba(0, 0, 0, 0.4);
     }
+
     .modal.opened {
       opacity: 1;
       visibility: visible;
     }
+
     .modal__inner {
       width: 1000px;
+      margin: auto;
       padding: 3.5rem 2.75rem;
-      position: relative; 
+      position: relative;
       max-width: 100%;
       background-color: #fff;
+    }
+
+    .modal__close {
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border: none;
+      cursor: pointer;
+      z-index: 5;
+      position: absolute;
+      background-color: transparent;
+    }
+
+    .modal__close::before,
+    .modal__close::after {
+      top: 50%;
+      left: 0;
+      width: 100%;
+      content: "";
+      position: absolute;
+      border-bottom: 2px solid #666;
+    }
+
+    .modal__close::before {
+      transform: rotate(-45deg);
+    }
+
+    .modal__close::after {
+      transform: rotate(45deg);
+    }
+
+    @media (max-width: 575.98px) {
+      body::before {
+        background-size: 90% auto;
+      }
+
+      .modal {
+        padding: 1.5rem;
+      }
+
+      .modal__inner {
+        padding: 3.5rem 1.75rem 2rem;
+      }
+
+      .modal__close {
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+      }
     }
   </style>
   <div class="efe">
@@ -289,16 +370,27 @@
   </button>
   <div class="modal" data-present-hide="">
     <div class="modal__inner">
+      <button class="modal__close" type="button" name="modal-close"><span class="sr-only">Закрыть окно</span></button>
       <div class="present-popup">
-        <p class="present-popup__title" data-shadow-text="Мы Подготовили Новогодние&nbsp;Подарки Для Вас!"
-          >Мы Подготовили Новогодние&nbsp;Подарки Для Вас!</p>
+        <p class="present-popup__title" data-shadow-text="Мы Подготовили Новогодние&nbsp;Подарки Для Вас!">Мы
+          Подготовили Новогодние&nbsp;Подарки Для Вас!</p>
         <p class="present-popup__subtitle">Получите свой подарок</p>
         <div class="present-popup__items">
           <div class="present-popup__item present-popup__item_card">
-            <div class="present-popup__card present-popup__card_01"></div>
+            <div class="present-popup__card present-popup__card_01">
+              <div class="present-popup__card-inner">
+                <span class="present-popup__discount-title"><span>Скидка</span> на весь ассортимент</span>
+                <span class="present-popup__discount-percent">10%</span>
+              </div>
+            </div>
           </div>
           <div class="present-popup__item present-popup__item_card">
-            <div class="present-popup__card present-popup__card_02"></div>
+            <div class="present-popup__card present-popup__card_02">
+              <div class="present-popup__card-inner">
+                <span class="present-popup__discount-title"><span>Скидка</span> на сопут&shy;ствующие товары</span>
+                <span class="present-popup__discount-percent">20%</span>
+              </div>
+            </div>
           </div>
           <div class="present-popup__item">
             <form class="present-popup__form" name="present-popup" novalidate>
@@ -327,12 +419,28 @@
   </div>
   <script>
     const b = document.querySelector("button[name='get-a-present']");
+    const c = document.querySelectorAll(".modal button");
     const m = document.querySelector(".modal");
 
     b.addEventListener("click", function () {
       setTimeout(function () {
         m.classList.add("opened");
       }, 500);
+    });
+
+    c.forEach(function (button) {
+      button.addEventListener("click", function () {
+        m.classList.remove("opened");
+      });
+    });
+
+    document.documentElement.addEventListener("click", function (event) {
+      if (!m.classList.contains("opened")) return;
+      if (!event.target.closest(".modal__inner")) m.classList.remove("opened");
+    });
+
+    window.addEventListener("load", function () {
+      document.body.classList.add("show-logo");
     });
   </script>
 </body>
