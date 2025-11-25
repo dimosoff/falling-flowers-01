@@ -1,0 +1,65 @@
+$element-size: 20px;
+$wind: false;
+$heading: false;
+
+@import "_utility";
+
+.efe {
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100em;
+  bottom: 0;
+  margin: 0 auto;
+  z-index: 999999;
+  position: fixed;
+  overflow: hidden;
+  max-width: 100%;
+  font-size: 19.2px;
+  user-select: none;
+  pointer-events: none;
+
+  &__falling {
+    & > div {
+      position: absolute;
+      width: $element-size;
+      height: $element-size;
+      background: url("../falling-02/snowflake-01.png") center / contain no-repeat
+        transparent;
+
+      $flakesCount: 4;
+      @for $i from 1 to $flakesCount {
+        &:nth-child(#{$flakesCount}n + #{$i}) {
+          background-image: url("../falling-02/snowflake-0#{$i}.png");
+        }
+      }
+    }
+  }
+  @if ($heading) {
+    &__header {
+      display: flex;
+      transform: translateY(-60%);
+      align-items: center;
+      justify-content: center;
+
+      & > div {
+        flex-shrink: 0;
+        transform-origin: center top;
+      }
+    }
+  }
+}
+
+@for $i from 1 to 101 {
+  @if ($wind) {
+    @include fallingAnimation02($i);
+  } @else {
+    @include fallingAnimation01($i);
+  }
+}
+
+@if ($heading) {
+  @for $j from 1 to 51 {
+    @include flowerHeading($j);
+  }
+}
