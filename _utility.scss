@@ -1,65 +1,123 @@
-@mixin keyframe($n) {
-  @keyframes fall-#{$n} {
+@use "sass:map";
+@use "sass:math";
+
+@mixin keyframe($name,$n) {
+  @keyframes #{$name}-#{$n} {
     @content;
   }
 }
 
 @mixin fallingAnimation01($number) {
-  $top: calc(random(20) + 40);
-  $scale: calc(random() / 2 + 0.5);
+  $top: calc(math.random(20) + 40);
+  $scale: calc(math.random() / 2 + 0.5);
   $speed: 20;
   $wind: 0;
-  $position: calc(random(100 + ($wind * 2)) - $wind);
+  $position: calc(math.random(100 + ($wind * 2)) - $wind);
 
   .efe__falling > div:nth-child(#{$number}) {
-    opacity: calc(random() / 2 + 0.5);
+    opacity: calc(math.random() / 2 + 0.5);
     transform: translate(
-        #{calc($position + random(20) - 10 - $wind)}em,
+        #{calc($position + math.random(20) - 10 - $wind)}em,
         calc($element-size * -2)
       )
-      scale($scale) rotate(#{calc(random(360) - 180)}deg);
-    animation: fall-#{$number} #{random(15) + $speed}s -#{random(30)}s linear
+      scale($scale) rotate(#{calc(math.random(360) - 180)}deg);
+    animation: fall-#{$number} #{math.random(15) + $speed}s -#{math.random(30)}s linear
       infinite;
   }
-  @include keyframe($number) {
-    #{random(30) + 35}% {
-      transform: translate(#{calc($position + random(20) - 10)}em, #{$top}vh)
-        scale($scale) rotate(#{calc(random(360) - 180)}deg);
+  @include keyframe(fall, $number) {
+    #{math.random(30) + 35}% {
+      transform: translate(#{calc($position + math.random(20) - 10)}em, #{$top}vh)
+        scale($scale) rotate(#{calc(math.random(360) - 180)}deg);
     }
     to {
       transform: translate(
-          #{calc($position + random(20) - 10 + $wind)}em,
+          #{calc($position + math.random(20) - 10 + $wind)}em,
           100vh
         )
-        scale($scale) rotate(#{calc(random(360) - 180)}deg);
+        scale($scale) rotate(#{calc(math.random(360) - 180)}deg);
     }
   }
 }
 @mixin fallingAnimation02($number) {
-  $top: calc(random(20) + 40);
-  $scale: calc(random() / 2 + 0.5);
+  $top: calc(math.random(20) + 40);
+  $scale: calc(math.random() / 2 + 0.5);
   $speed: 10;
   $wind: 20;
-  $position: calc(random(100 + ($wind * 2)) - $wind);
+  $position: calc(math.random(100 + ($wind * 2)) - $wind);
 
   .efe__falling > div:nth-child(#{$number}) {
-    opacity: calc(random() / 2 + 0.5);
+    opacity: calc(math.random() / 2 + 0.5);
     transform: translate(
-        #{calc($position + random(10) - 5 - $wind)}vw,
+        #{calc($position + math.random(10) - 5 - $wind)}vw,
         calc($element-size * -2)
       )
-      scale($scale) rotate(#{calc(random(360) - 180)}deg);
-    animation: fall-#{$number} #{random(10) + $speed}s -#{random(30)}s linear
+      scale($scale) rotate(#{calc(math.random(360) - 180)}deg);
+    animation: fall-#{$number} #{math.random(10) + $speed}s -#{math.random(30)}s linear
       infinite;
   }
-  @include keyframe($number) {
-    #{random(10) + 45}% {
-      transform: translate(#{calc($position + random(10) - 5)}vw, #{$top}vh)
-        scale($scale) rotate(#{calc(random(360) - 180)}deg);
+  @include keyframe(fall, $number) {
+    #{math.random(10) + 45}% {
+      transform: translate(#{calc($position + math.random(10) - 5)}vw, #{$top}vh)
+        scale($scale) rotate(#{calc(math.random(360) - 180)}deg);
     }
     to {
-      transform: translate(#{calc($position + random(10) - 5 + $wind)}vw, 100vh)
-        scale($scale) rotate(#{calc(random(360) - 180)}deg);
+      transform: translate(#{calc($position + math.random(10) - 5 + $wind)}vw, 100vh)
+        scale($scale) rotate(#{calc(math.random(360) - 180)}deg);
+    }
+  }
+}
+@mixin floatingAnimation($number) {
+  $top: calc(math.random(20) + 40);
+  $scale: calc(math.random() / 1.5 + 0.5);
+  $speed: 50;
+  $wind: 20;
+  $position: calc(math.random(100 + ($wind * 2)) - $wind);
+
+  .hearts__float > div:nth-child(#{$number}) {
+    opacity: calc(math.random() / 2 + 0.5);
+    transform: translate(
+        #{calc($position + math.random(10) - 5 - $wind)}vw,
+        calc(100vh + $element-size * 2)
+      )
+      scale($scale) rotate(#{calc(math.random(50) - 25)}deg);
+    animation: float-#{$number} #{math.random(10) + $speed}s -#{math.random($speed)}s linear
+      infinite;
+  }
+  @include keyframe(float, $number) {
+    #{math.random(10) * -1 + 45}% {
+      transform: translate(#{calc($position + math.random(10) - 5)}vw, #{$top}vh)
+        scale($scale) rotate(#{calc(math.random(50) - 25)}deg);
+    }
+    to {
+      transform: translate(#{calc($position + math.random(10) - 5 + $wind)}vw, calc($element-size * -2))
+        scale($scale) rotate(#{calc(math.random(50) - 25)}deg);
+    }
+  }
+}
+@mixin flowerAnimation($number) {
+  $top: calc(math.random(20) + 40);
+  $scale: calc(math.random() / 2 + 0.5);
+  $speed: 20;
+  $position: math.random(100);
+
+  .flowers > div:nth-child(#{$number}) {
+    opacity: calc(math.random() / 2 + 0.5);
+    transform: translate(
+        #{calc($position + math.random(20) - 10)}vw,
+        calc($flower-size * -2)
+      )
+      scale($scale) rotate(#{calc(math.random(360) - 180)}deg);
+    animation: fall-#{$number} #{math.random(15) + $speed}s -#{math.random(30)}s linear
+      infinite;
+  }
+  @include keyframe(fall, $number) {
+    #{math.random(30) + 35}% {
+      transform: translate(#{calc($position + math.random(20) - 10)}vw, #{$top}vh)
+        scale($scale) rotate(#{calc(math.random(360) - 180)}deg);
+    }
+    to {
+      transform: translate(#{calc($position + math.random(20) - 10)}vw, 100vh)
+        scale($scale) rotate(#{calc(math.random(360) - 180)}deg);
     }
   }
 }
@@ -92,39 +150,38 @@ $h-flowers: (
 );
 
 @mixin flowerHeading($number) {
-  $f-number: random(8);
-  $delta: calc(random() + 2);
-  $delay: calc(random() * 2);
+  $f-number: math.random(8);
+  $delta: calc(math.random() + 2);
+  $delay: calc(math.random() * 2);
 
-  $url: map-get($h-flowers, f#{$f-number});
-  $width: round(calc(map-get($h-flowers, f#{$f-number}-w) / $delta));
-  $height: round(calc(map-get($h-flowers, f#{$f-number}-h) / $delta));
+  $url: map.get($h-flowers, f#{$f-number});
+  $width: round(calc(map.get($h-flowers, f#{$f-number}-w) / $delta));
+  $height: round(calc(map.get($h-flowers, f#{$f-number}-h) / $delta));
   $margin: #{round(calc(-5 * $delta))}px;
 
-  .efe__header > div:nth-child(#{$number}) {
+  .h-flowers > div:nth-child(#{$number}) {
     width: $width;
     height: $height;
     margin: 0 $margin $margin;
-    animation: wave 6s cubic-bezier(0.5, 0, 0.5, 1) #{$delay}s infinite;
+    animation: wave 6s cubic-bezier(.5,0,.5,1) #{$delay}s infinite;
     background: url($url) center / contain no-repeat transparent;
   }
 }
-@if ($heading) {
-  @keyframes wave {
-    0% {
-      transform: rotate(0deg);
-    }
-    20% {
-      transform: rotate(-5deg);
-    }
-    60% {
-      transform: rotate(4deg);
-    }
-    85% {
-      transform: rotate(-1deg);
-    }
-    100% {
-      transform: rotate(0deg);
-    }
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-5deg);
+  }
+  60% {
+    transform: rotate(4deg);
+  }
+  85% {
+    transform: rotate(-1deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }

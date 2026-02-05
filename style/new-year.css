@@ -49,7 +49,7 @@
   width: 420px;
   height: 129px;
   margin: 0 -15px;
-  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0.6250222219s infinite;
+  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0.0996258596s infinite;
   background-image: url("../new-year/05.png");
 }
 .new-year__branch_right {
@@ -60,7 +60,7 @@
   width: 101px;
   height: 60px;
   margin: 0 -30px 40px;
-  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0.6250222219s infinite;
+  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0.0996258596s infinite;
   background-image: url("../new-year/06.png");
 }
 .new-year__toy {
@@ -144,50 +144,50 @@
   height: 104px;
   margin: 0 -15px;
   position: absolute;
-  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0.6250222219s infinite;
+  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0.0996258596s infinite;
   background-image: url("../new-year/04.png");
 }
 .new-year__toy_branch-01 {
   transform: translate(-590px, -50px);
 }
 .new-year__toy_branch-01 > * {
-  animation-delay: 1.491015991s;
+  animation-delay: 0.2435772115s;
 }
 .new-year__toy_branch-02 {
   transform: translate(-420px, -10px) rotate(-10deg);
 }
 .new-year__toy_branch-02 > * {
-  animation-delay: 1.8013533984s;
+  animation-delay: 0.9401648041s;
 }
 .new-year__toy_branch-03 {
   transform: translate(-880px, -10px) rotate(-10deg);
 }
 .new-year__toy_branch-03 > * {
-  animation-delay: 0.7177209681s;
+  animation-delay: 1.3329893702s;
 }
 .new-year__toy_branch-04 {
   transform: translate(-960px, -50px) rotate(25deg);
 }
 .new-year__toy_branch-04 > * {
-  animation-delay: 1.6842534928s;
+  animation-delay: 0.4428649796s;
 }
 .new-year__toy_branch-05 {
   transform: translate(300px, -30px) scaleX(-1);
 }
 .new-year__toy_branch-05 > * {
-  animation-delay: 1.9381062818s;
+  animation-delay: 1.3250152759s;
 }
 .new-year__toy_branch-06 {
   transform: translate(620px, -40px) scaleX(-1);
 }
 .new-year__toy_branch-06 > * {
-  animation-delay: 0.8947867373s;
+  animation-delay: 1.1342901013s;
 }
 .new-year__toy_branch-07 {
   transform: translate(910px, -40px) scaleX(-1) rotate(5deg);
 }
 .new-year__toy_branch-07 > * {
-  animation-delay: 1.1219514874s;
+  animation-delay: 0.6252729361s;
 }
 
 @keyframes branch {

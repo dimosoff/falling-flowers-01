@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Новогоднее оформление CWEB 01</title>
+  <link rel="stylesheet" href="style/hearts.css">
+  <link rel="stylesheet" href="style/valentine.css">
+  <link rel="stylesheet" href="style/present-popup-valentine.css">
+  <script src="valentine.js" defer></script>
+</head>
+
+<body>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      overflow: hidden;
+      font-size: 16px;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+      /* background: linear-gradient(to left, #333 50%, #ddd 50%); */
+      /* background: radial-gradient(#fff 0%, #0067ff 100%); */
+      background: radial-gradient(#0067ff 0%, #0067ff 100%);
+    }
+
+    .content {
+      gap: 50px;
+      top: 50%;
+      left: 50%;
+      opacity: 0;
+      display: flex;
+      position: absolute;
+      max-width: 100%;
+      transform: translate(-50%, -50%) scale(0.1);
+      transition: opacity 2.5s cubic-bezier(0, 1, 0, 1), transform 2.5s cubic-bezier(.39, .49, .29, 1.2);
+      align-items: center;
+      padding-left: 20px;
+      padding-right: 20px;
+      flex-direction: column;
+    }
+
+    body.show-logo .content {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .logo {
+      color: #fff;
+      width: 400px;
+      position: relative;
+      max-width: 100%;
+    }
+
+    .logo svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .button {
+      color: #fff;
+      border: 0;
+      padding: 0.5em 1.5em;
+      font-size: 18px;
+      transform: translateY(0px);
+      min-height: 50px;
+      transition: transform 0.25s;
+      border-radius: 50px;
+      background-color: #f02626;
+    }
+
+    .button:hover {
+      transform: translateY(-5px);
+    }
+
+    .button::after {
+      top: -10px;
+      left: 5%;
+      width: 90%;
+      height: 36px;
+      content: "";
+      display: block;
+      position: absolute;
+      /* transform: translateY(-35%); */
+      background: url("new-year/snow-01.png") center / 100% 100% no-repeat transparent;
+    }
+
+    .button_alt::after {
+      top: -18px;
+      transform: rotate(-2deg);
+      background-image: url("new-year/snow-02.png");
+    }
+
+    .modal {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      z-index: 1010;
+      padding: 3rem;
+      display: flex;
+      position: fixed;
+      overflow-y: auto;
+      visibility: hidden;
+      overflow-x: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.4);
+
+      overflow: hidden;
+      perspective: 100px;
+    }
+
+    .modal.opened {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal__inner {
+      width: 730px;
+      margin: auto;
+      padding: 3.5rem 2.75rem;
+      overflow: hidden;
+      position: relative;
+      max-width: 100%;
+      border-radius: 20px;
+      background-color: #fff;
+
+      transform: rotate3d(1, 0, 0, 20deg) scale3d(1, 1, 1) translate3d(0px, 730px, -110px);
+      transition: transform 0.5s;
+      transform-style: preserve-3d;
+    }
+
+    .modal.opened .modal__inner {
+      transform: rotate3d(1, 0, 0, 0deg) scale3d(1, 1, 1) translate3d(0px, 0px, 0px);
+    }
+
+    .modal__close {
+      top: 20px;
+      right: 20px;
+      width: 30px;
+      height: 30px;
+      border: none;
+      cursor: pointer;
+      z-index: 5;
+      position: absolute;
+      background-color: transparent;
+    }
+
+    .modal__close::before,
+    .modal__close::after {
+      top: 50%;
+      left: 0;
+      width: 100%;
+      content: "";
+      position: absolute;
+      border-bottom: 2px solid #666;
+    }
+
+    .modal__close::before {
+      transform: rotate(-45deg);
+    }
+
+    .modal__close::after {
+      transform: rotate(45deg);
+    }
+
+    @media (max-width: 575.98px) {
+      body::before {
+        background-size: 90% auto;
+      }
+
+      .modal {
+        padding: 1.5rem;
+      }
+
+      .modal__inner {
+        padding: 3.5rem 1.75rem 2rem;
+      }
+
+      .modal__close {
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+      }
+    }
+  </style>
+  <div class="content">
+    <div class="logo">
+      <svg width="400" height="124" viewBox="0 0 162 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M72.9969 30.6359C72.8055 34.2377 71.7455 36.9777 69.8317 38.8844C67.9326 40.7912 65.2236 41.7377 61.7343 41.7377C58.2452 41.7377 55.4331 40.4665 53.372 37.91C51.3109 35.3394 50.2656 31.8647 50.2656 27.4862V21.3987C50.2656 17.0342 51.3256 13.5879 53.4308 11.0455C55.5657 8.50315 58.466 7.24609 62.1317 7.24609C65.5179 7.24609 68.1239 8.22068 69.964 10.1698C71.819 12.1049 72.8349 14.8732 72.9969 18.489H68.5507C68.3594 15.7489 67.7556 13.7998 66.7548 12.6274C65.7389 11.4552 64.2078 10.876 62.1467 10.876C59.7613 10.876 57.9213 11.78 56.6403 13.5738C55.3596 15.3534 54.7118 17.9806 54.7118 21.441V27.5992C54.7118 30.9892 55.3005 33.6021 56.493 35.41C57.7002 37.218 59.4377 38.1359 61.7343 38.1359C64.0311 38.1359 65.6798 37.585 66.681 36.4974C67.6968 35.41 68.3153 33.4468 68.5507 30.6218H72.9969V30.6359ZM85.6583 30.7065L86.1145 34.4636L86.8064 31.1444L92.401 7.72633H96.0817L101.514 31.1444L102.206 34.5624L102.707 30.6924L106.976 7.72633H111.378L104.415 41.2856H100.454L94.6093 16.8224L94.256 14.845L93.9027 16.8224L87.852 41.2856H83.862L76.913 7.72633H81.315L85.6583 30.7065ZM133.241 25.7772H120.86V37.6697H135.273V41.2856H116.458V7.72633H135.037V11.3704H120.86V22.1614H133.241V25.7772ZM140.926 41.2856V7.72633H150.893C154.088 7.72633 156.473 8.47492 158.078 9.95798C159.697 11.4552 160.507 13.6868 160.507 16.667C160.507 18.2348 160.095 19.619 159.285 20.8195C158.461 22.0201 157.356 22.9523 155.972 23.602C157.577 24.0681 158.843 25.0144 159.771 26.441C160.713 27.8676 161.184 29.5906 161.184 31.6106C161.184 34.6189 160.315 36.9918 158.593 38.715C156.885 40.4383 154.427 41.2997 151.246 41.2997H140.941L140.926 41.2856ZM145.328 25.5936V37.6697H151.335C152.998 37.6697 154.323 37.1471 155.295 36.1021C156.267 35.0427 156.768 33.5597 156.768 31.653C156.768 27.6133 154.986 25.5936 151.438 25.5936H145.328ZM145.328 22.0484H150.982C152.498 22.0484 153.735 21.554 154.662 20.5794C155.604 19.5907 156.075 18.2913 156.075 16.667C156.075 14.8167 155.649 13.489 154.809 12.6557C153.955 11.8082 152.66 11.3845 150.923 11.3845H145.343V22.0625L145.328 22.0484Z"
+          fill="currentColor" />
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M19.7427 0L39.4855 25L19.7427 50L0 25L19.7427 0Z"
+          fill="currentColor" />
+      </svg>
+    </div>
+  </div>
+  <div class="hearts">
+    <div class="hearts__float">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <!-- <div class="hearts__header">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div> -->
+  </div>
+  <div class="valentine">
+    <div class="valentine__inner">
+      <div class="valentine__branch valentine__branch_left">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="valentine__heart"></div>
+      <div class="valentine__branch valentine__branch_right">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="valentine__toy valentine__toy_01">
+        <div></div>
+      </div>
+      <div class="valentine__toy valentine__toy_02">
+        <div></div>
+      </div>
+      <div class="valentine__toy valentine__toy_03">
+        <div></div>
+      </div>
+      <div class="valentine__toy valentine__toy_04">
+        <div></div>
+      </div>
+      <div class="valentine__toy valentine__toy_05">
+        <div></div>
+      </div>
+      <div class="valentine__toy valentine__toy_06">
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <!-- <button class="floating-present" type="button" name="get-a-present">
+    <span class="floating-present__cap"></span>
+    <span class="floating-present__box-back"></span>
+    <span class="floating-present__box"></span>
+    <span class="floating-present__title">Получить подарок</span>
+  </button> -->
+  <div class="modal" data-present-hide="">
+    <div class="modal__inner">
+      <button class="modal__close" type="button" name="modal-close"><span class="sr-only">Закрыть окно</span></button>
+      <div class="present-popup">
+        <div class="present-popup__decoration present-popup__decoration_01"></div>
+        <div class="present-popup__decoration present-popup__decoration_02"></div>
+        <div class="present-popup__image"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    window.addEventListener("load", function () {
+      document.body.classList.add("show-logo");
+    });
+  </script>
+</body>
+
+</html>

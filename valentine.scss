@@ -1,0 +1,433 @@
+@use "sass:map";
+@use "sass:math";
+
+$obj: (
+  el01: "../valentine/el_01.png",
+  el01-w: 270px,
+  el01-h: 155px,
+  el02: "../valentine/el_02.png",
+  el02-w: 101px,
+  el02-h: 89px,
+  el04: "../valentine/el_04.png",
+  el04-w: 420px,
+  el04-h: 129px,
+  el05: "../valentine/el_05.png",
+  el05-w: 101px,
+  el05-h: 60px,
+  el06: "../valentine/el_06.png",
+  el06-w: 101px,
+  el06-h: 60px,
+  el07: "../valentine/el_07.png",
+  el07-w: 91px,
+  el07-h: 157px,
+  el08: "../valentine/el_08.png",
+  el08-w: 118px,
+  el08-h: 80px,
+  el09: "../valentine/el_09.png",
+  el09-w: 100px,
+  el09-h: 120px,
+  el10: "../valentine/el_10.png",
+  el10-w: 112px,
+  el10-h: 144px,
+  el11: "../valentine/el_11.png",
+  el11-w: 80px,
+  el11-h: 80px,
+  branch01: "../valentine/el_03_01.png",
+  branch01-w: 207px,
+  branch01-h: 108px,
+  branch02: "../valentine/el_03_02.png",
+  branch02-w: 197px,
+  branch02-h: 103px,
+);
+
+$branches-margin-sides: -20px;
+
+$branch-animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite;
+$present-animation: present 1.4s cubic-bezier(0.28, 0.84, 0.42, 1);
+
+%positioning {
+  display: flex;
+  background: none center / contain no-repeat transparent;
+  flex-shrink: 0;
+  transform-origin: 50% 100%;
+}
+
+.valentine {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 100;
+  position: fixed;
+  overflow: hidden;
+  user-select: none;
+  pointer-events: none;
+
+  &__inner {
+    display: flex;
+    padding: 100px 0 0;
+    transform: translateY(25%);
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 1199.98px) and (min-width: 768px) {
+      transform: translateY(30%) scale(0.8);
+    }
+    @media (max-width: 767.98px) and (min-width: 576px) {
+      transform: translateY(35%) scale(0.6);
+    }
+    @media (max-width: 575.98px) {
+      transform: translateY(37.5%) scale(0.45);
+    }
+  }
+  &__branch {
+    // z-index: 1;
+    // position: relative;
+    @extend %positioning;
+
+    > * {
+      width: map.get($obj, branch01-w);
+      height: map.get($obj, branch01-h);
+      margin: 0 $branches-margin-sides;
+      animation: $branch-animation;
+      background: none center / contain no-repeat transparent;
+      transform-origin: 50% 100%;
+      background-image: url(map.get($obj, branch01));
+
+      @for $i from 1 through 5 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{calc(math.random() * 5)}s;
+        }
+      }
+      &:nth-child(2n + 1) {
+        width: map.get($obj, branch02-w);
+        height: map.get($obj, branch02-h);
+        background-image: url(map.get($obj, branch02));
+      }
+      &:nth-child(3n + 1) {
+        width: 150px;
+        height: 110px;
+      }
+    }
+
+    &_left {
+      > * {
+        &:nth-child(1),
+        &:nth-child(5),
+        &:nth-child(6) {
+          z-index: 4;
+        }
+      }
+    }
+    &_right {
+      z-index: 2;
+      transform: scaleX(-1);
+
+      > * {
+        &:nth-child(4),
+        &:nth-child(4),
+        &:nth-child(4) {
+          z-index: 4;
+        }
+      }
+    }
+  }
+  &__heart {
+    z-index: 2;
+    @extend %positioning;
+    width: map.get($obj, el01-w);
+    height: map.get($obj, el01-h);
+    margin: 0 -70px 50px;
+    animation: $branch-animation;
+    background-image: url(map.get($obj, el01));
+  }
+  &__toy {
+    z-index: 3;
+    position: absolute;
+
+    &.animate {
+      > * {
+        animation: $present-animation;
+      }
+    }
+
+    &_01 {
+      transform: translate(-427px, -62px) scale(0.8) rotate(0deg);
+      pointer-events: all;
+
+      > * {
+        width: map.get($obj, el02-w);
+        height: map.get($obj, el02-h);
+        margin: 0 $branches-margin-sides;
+        position: absolute;
+        @extend %positioning;
+
+        & {
+          background-image: url(map.get($obj, el02));
+        }
+      }
+    }
+    &_02 {
+      transform: translate(-91px, -22px) scale(0.8) rotate(-11deg);
+      pointer-events: all;
+
+      > * {
+        width: map.get($obj, el11-w);
+        height: map.get($obj, el11-h);
+        margin: 0 $branches-margin-sides;
+        position: absolute;
+        @extend %positioning;
+
+        & {
+          background-image: url(map.get($obj, el11));
+        }
+      }
+    }
+    &_03 {
+      transform: translate(-866px, -92px) scale(0.9) rotate(-10deg);
+      pointer-events: all;
+
+      > * {
+        width: map.get($obj, el10-w);
+        height: map.get($obj, el10-h);
+        margin: 0 $branches-margin-sides;
+        position: absolute;
+        @extend %positioning;
+
+        & {
+          background-image: url(map.get($obj, el10));
+        }
+      }
+    }
+    &_04 {
+      z-index: 1;
+      transform: translate(381px, -40px) scale(0.7) rotate(-25deg);
+      pointer-events: all;
+
+      > * {
+        width: map.get($obj, el08-w);
+        height: map.get($obj, el08-h);
+        margin: 0 $branches-margin-sides;
+        position: absolute;
+        @extend %positioning;
+
+        & {
+          background-image: url(map.get($obj, el08));
+        }
+      }
+    }
+    &_05 {
+      z-index: 1;
+      transform: translate(743px, -114px) scale(0.8) rotate(-4deg);
+      pointer-events: all;
+
+      > * {
+        width: map.get($obj, el07-w);
+        height: map.get($obj, el07-h);
+        margin: 0 $branches-margin-sides;
+        position: absolute;
+        @extend %positioning;
+
+        & {
+          background-image: url(map.get($obj, el07));
+        }
+      }
+    }
+    &_06 {
+      transform: translate(653px, -44px) scale(0.7) rotate(7deg);
+      pointer-events: all;
+
+      > * {
+        width: map.get($obj, el09-w);
+        height: map.get($obj, el09-h);
+        margin: 0 $branches-margin-sides;
+        position: absolute;
+        @extend %positioning;
+
+        & {
+          background-image: url(map.get($obj, el09));
+        }
+      }
+    }
+    /*&_hat {
+      pointer-events: all;
+
+      > * {
+        width: map.get($obj, f1-w);
+        height: map.get($obj, f1-h);
+        margin: 0 $branches-margin-sides;
+        position: absolute;
+        @extend %positioning;
+        background-image: url(map.get($obj, f1));
+      }
+      &.animate {
+        > * {
+          animation: $present-animation;
+        }
+      }
+      &-01 {
+        transform: translate(550px, -85px) scale(0.6) rotate(9deg);
+      }
+      &-02 {
+        transform: translate(1150px, -55px) scale(0.4) rotate(-9deg);
+      }
+      &-03 {
+        transform: translate(-1030px, -65px) scale(0.6) rotate(-40deg);
+      }
+    }
+    &_present {
+      pointer-events: all;
+
+      > * {
+        width: map.get($obj, el04-w);
+        height: map.get($obj, el04-h);
+        margin: 0 $branches-margin-sides;
+        position: absolute;
+        @extend %positioning;
+        background-image: url(map.get($obj, el04));
+      }
+      &.animate {
+        > * {
+          animation: $present-animation;
+        }
+      }
+      &-01 {
+        transform: translate(160px, -65px) scale(0.7) rotate(12deg);
+      }
+      &-02 {
+        transform: translate(910px, -95px) scale(0.6) rotate(12deg);
+      }
+      &-03 {
+        transform: translate(-650px, -85px) scale(0.5) rotate(-12deg);
+      }
+      &-04 {
+        transform: translate(-1200px, -65px) scale(0.4) rotate(-3deg);
+      }
+    }
+    &_candy {
+      pointer-events: all;
+
+      > * {
+        width: map.get($obj, f3-w);
+        height: map.get($obj, f3-h);
+        margin: 0 $branches-margin-sides;
+        position: absolute;
+        @extend %positioning;
+        background-image: url(map.get($obj, f3));
+      }
+      &.animate {
+        > * {
+          animation: $present-animation;
+        }
+      }
+      &-01 {
+        transform: translate(430px, -55px) scale(0.8) rotate(0deg);
+      }
+      &-02 {
+        transform: translate(860px, -15px) scaleX(-1) scale(0.4) rotate(-60deg);
+      }
+      &-03 {
+        transform: translate(-410px, -35px) scale(0.5) rotate(-25deg);
+      }
+      &-04 {
+        transform: translate(-860px, -55px) scale(0.5) rotate(35deg);
+      }
+    }
+    &_branch {
+      > * {
+        width: map.get($obj, f4-w);
+        height: map.get($obj, f4-h);
+        margin: 0 $branches-margin-sides;
+        position: absolute;
+        @extend %positioning;
+        animation: $branch-animation;
+        background-image: url(map.get($obj, f4));
+      }
+      &-01 {
+        transform: translate(-590px, -50px);
+
+        > * {
+          animation-delay: #{calc(math.random() * 2)}s;
+        }
+      }
+      &-02 {
+        transform: translate(-420px, -10px) rotate(-10deg);
+
+        > * {
+          animation-delay: #{calc(math.random() * 2)}s;
+        }
+      }
+      &-03 {
+        transform: translate(-880px, -10px) rotate(-10deg);
+
+        > * {
+          animation-delay: #{calc(math.random() * 2)}s;
+        }
+      }
+      &-04 {
+        transform: translate(-960px, -50px) rotate(25deg);
+
+        > * {
+          animation-delay: #{calc(math.random() * 2)}s;
+        }
+      }
+      &-05 {
+        transform: translate(300px, -30px) scaleX(-1);
+
+        > * {
+          animation-delay: #{calc(math.random() * 2)}s;
+        }
+      }
+      &-06 {
+        transform: translate(620px, -40px) scaleX(-1);
+
+        > * {
+          animation-delay: #{calc(math.random() * 2)}s;
+        }
+      }
+      &-07 {
+        transform: translate(910px, -40px) scaleX(-1) rotate(5deg);
+
+        > * {
+          animation-delay: #{calc(math.random() * 2)}s;
+        }
+      }
+    }*/
+  }
+}
+
+@keyframes branch {
+  0% {
+    transform: translate(0) rotate(0deg);
+  }
+  20% {
+    transform: translate(-1px, 0) rotate(-0.6deg);
+  }
+  60% {
+    transform: translate(0, -2px) rotate(0.4deg);
+  }
+  85% {
+    transform: translate(-1px, 1px) rotate(-0.2deg);
+  }
+  100% {
+    transform: translate(0) rotate(0deg);
+  }
+}
+@keyframes present {
+  0% {
+    transform: translateY(0);
+  }
+  15% {
+    transform: translateY(0) scale(1.2, 0.8);
+  }
+  30% {
+    transform: translateY(0) scale(0.8, 1.2);
+  }
+  60% {
+    transform: translateY(-80px) scale(1);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

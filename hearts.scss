@@ -1,0 +1,60 @@
+$element-size: 20px;
+$heading: false;
+
+@import "_utility";
+
+.hearts {
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0;
+  bottom: 0;
+  z-index: 999;
+  position: fixed;
+  overflow: hidden;
+  max-width: 100%;
+  font-size: 19.2px;
+  user-select: none;
+  pointer-events: none;
+
+  &__float {
+    & > div {
+      position: absolute;
+      width: $element-size;
+      height: $element-size;
+      background: url("../hearts/heart_01.png") center / contain no-repeat
+        transparent;
+
+      $flakesCount: 3;
+      @for $i from 1 to $flakesCount {
+        &:nth-child(#{$flakesCount}n + #{$i}) {
+          background-image: url("../hearts/heart_0#{$i}.png");
+        }
+      }
+    }
+  }
+  @if ($heading) {
+    &__header {
+      display: flex;
+      transform: translateY(-60%);
+      align-items: center;
+      justify-content: center;
+
+      & > div {
+        flex-shrink: 0;
+        transform-origin: center top;
+      }
+    }
+  }
+}
+
+@for $i from 1 to 101 {
+  @include floatingAnimation($i);
+}
+
+@if ($heading) {
+  @for $j from 1 to 51 {
+    @include flowerHeading($j);
+  }
+}

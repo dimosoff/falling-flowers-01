@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "sass:math";
+
 $f-newyear: (
   f1: "../new-year/01.png",
   f1-w: 149px,
@@ -21,7 +24,7 @@ $f-newyear: (
 
 $branches-margin-sides: -15px;
 
-$branch-animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) #{calc(random() * 2)}s
+$branch-animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) #{calc(math.random() * 2)}s
   infinite;
 $present-animation: present 1.4s cubic-bezier(0.28, 0.84, 0.42, 1);
 
@@ -67,11 +70,11 @@ $present-animation: present 1.4s cubic-bezier(0.28, 0.84, 0.42, 1);
     @extend %new-year-positioning;
 
     > * {
-      width: map-get($f-newyear, f5-w);
-      height: map-get($f-newyear, f5-h);
+      width: map.get($f-newyear, f5-w);
+      height: map.get($f-newyear, f5-h);
       margin: 0 $branches-margin-sides;
       animation: $branch-animation;
-      background-image: url(map-get($f-newyear, f5));
+      background-image: url(map.get($f-newyear, f5));
     }
 
     // &_left {}
@@ -82,11 +85,11 @@ $present-animation: present 1.4s cubic-bezier(0.28, 0.84, 0.42, 1);
   &__bow {
     z-index: 2;
     @extend %new-year-positioning;
-    width: map-get($f-newyear, f6-w);
-    height: map-get($f-newyear, f6-h);
+    width: map.get($f-newyear, f6-w);
+    height: map.get($f-newyear, f6-h);
     margin: 0 -30px 40px;
     animation: $branch-animation;
-    background-image: url(map-get($f-newyear, f6));
+    background-image: url(map.get($f-newyear, f6));
   }
   &__toy {
     z-index: 3;
@@ -96,12 +99,12 @@ $present-animation: present 1.4s cubic-bezier(0.28, 0.84, 0.42, 1);
       pointer-events: all;
 
       > * {
-        width: map-get($f-newyear, f1-w);
-        height: map-get($f-newyear, f1-h);
+        width: map.get($f-newyear, f1-w);
+        height: map.get($f-newyear, f1-h);
         margin: 0 $branches-margin-sides;
         position: absolute;
         @extend %new-year-positioning;
-        background-image: url(map-get($f-newyear, f1));
+        background-image: url(map.get($f-newyear, f1));
       }
       &.animate {
         > * {
@@ -122,12 +125,12 @@ $present-animation: present 1.4s cubic-bezier(0.28, 0.84, 0.42, 1);
       pointer-events: all;
 
       > * {
-        width: map-get($f-newyear, f2-w);
-        height: map-get($f-newyear, f2-h);
+        width: map.get($f-newyear, f2-w);
+        height: map.get($f-newyear, f2-h);
         margin: 0 $branches-margin-sides;
         position: absolute;
         @extend %new-year-positioning;
-        background-image: url(map-get($f-newyear, f2));
+        background-image: url(map.get($f-newyear, f2));
       }
       &.animate {
         > * {
@@ -151,12 +154,12 @@ $present-animation: present 1.4s cubic-bezier(0.28, 0.84, 0.42, 1);
       pointer-events: all;
 
       > * {
-        width: map-get($f-newyear, f3-w);
-        height: map-get($f-newyear, f3-h);
+        width: map.get($f-newyear, f3-w);
+        height: map.get($f-newyear, f3-h);
         margin: 0 $branches-margin-sides;
         position: absolute;
         @extend %new-year-positioning;
-        background-image: url(map-get($f-newyear, f3));
+        background-image: url(map.get($f-newyear, f3));
       }
       &.animate {
         > * {
@@ -178,61 +181,61 @@ $present-animation: present 1.4s cubic-bezier(0.28, 0.84, 0.42, 1);
     }
     &_branch {
       > * {
-        width: map-get($f-newyear, f4-w);
-        height: map-get($f-newyear, f4-h);
+        width: map.get($f-newyear, f4-w);
+        height: map.get($f-newyear, f4-h);
         margin: 0 $branches-margin-sides;
         position: absolute;
         @extend %new-year-positioning;
         animation: $branch-animation;
-        background-image: url(map-get($f-newyear, f4));
+        background-image: url(map.get($f-newyear, f4));
       }
       &-01 {
         transform: translate(-590px, -50px);
 
         > * {
-          animation-delay: #{calc(random() * 2)}s;
+          animation-delay: #{calc(math.random() * 2)}s;
         }
       }
       &-02 {
         transform: translate(-420px, -10px) rotate(-10deg);
 
         > * {
-          animation-delay: #{calc(random() * 2)}s;
+          animation-delay: #{calc(math.random() * 2)}s;
         }
       }
       &-03 {
         transform: translate(-880px, -10px) rotate(-10deg);
 
         > * {
-          animation-delay: #{calc(random() * 2)}s;
+          animation-delay: #{calc(math.random() * 2)}s;
         }
       }
       &-04 {
         transform: translate(-960px, -50px) rotate(25deg);
 
         > * {
-          animation-delay: #{calc(random() * 2)}s;
+          animation-delay: #{calc(math.random() * 2)}s;
         }
       }
       &-05 {
         transform: translate(300px, -30px) scaleX(-1);
 
         > * {
-          animation-delay: #{calc(random() * 2)}s;
+          animation-delay: #{calc(math.random() * 2)}s;
         }
       }
       &-06 {
         transform: translate(620px, -40px) scaleX(-1);
 
         > * {
-          animation-delay: #{calc(random() * 2)}s;
+          animation-delay: #{calc(math.random() * 2)}s;
         }
       }
       &-07 {
         transform: translate(910px, -40px) scaleX(-1) rotate(5deg);
 
         > * {
-          animation-delay: #{calc(random() * 2)}s;
+          animation-delay: #{calc(math.random() * 2)}s;
         }
       }
     }

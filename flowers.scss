@@ -1,0 +1,41 @@
+@import "_utility";
+
+$flower-size: 20px;
+.iwd {
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  position: absolute;
+  user-select: none;
+  pointer-events: none;
+}
+.flowers {
+  & > div {
+    position: absolute;
+    width: $flower-size;
+    height: $flower-size;
+    background: url("../flowers/flower.png") center / contain no-repeat
+      transparent;
+  }
+}
+
+.h-flowers {
+  display: flex;
+  transform: translateY(-60%);
+  align-items: center;
+  justify-content: center;
+
+  & > div {
+    flex-shrink: 0;
+    transform-origin: center top;
+  }
+}
+
+@for $i from 1 to 101 {
+  @include flowerAnimation($i);
+}
+
+@for $j from 1 to 51 {
+  @include flowerHeading($j);
+}
