@@ -76,7 +76,7 @@
   .hearts__float > div:nth-child(#{$number}) {
     opacity: calc(math.random() / 2 + 0.5);
     transform: translate(
-        #{calc($position + math.random(10) - 5 - $wind)}vw,
+        #{calc($position + math.random(10) - 5 - $wind)}em,
         calc(100vh + $element-size * 2)
       )
       scale($scale) rotate(#{calc(math.random(50) - 25)}deg);
@@ -85,11 +85,11 @@
   }
   @include keyframe(float, $number) {
     #{math.random(10) * -1 + 45}% {
-      transform: translate(#{calc($position + math.random(10) - 5)}vw, #{$top}vh)
+      transform: translate(#{calc($position + math.random(10) - 5)}em, #{$top}vh)
         scale($scale) rotate(#{calc(math.random(50) - 25)}deg);
     }
     to {
-      transform: translate(#{calc($position + math.random(10) - 5 + $wind)}vw, calc($element-size * -2))
+      transform: translate(#{calc($position + math.random(10) - 5 + $wind)}em, calc($element-size * -2))
         scale($scale) rotate(#{calc(math.random(50) - 25)}deg);
     }
   }

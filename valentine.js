@@ -1,4 +1,4 @@
-const TOYS = document.querySelectorAll(".valentine__toy");
+const TOYS = document.querySelectorAll(".valentine__toy, .valentine__center");
 const FLOATING_PRESENT = document.querySelector("button[name='get-a-present']");
 const MODAL_CLOSE = document.querySelectorAll(".modal button");
 const MODAL = document.querySelector(".modal");
@@ -27,7 +27,7 @@ FLOATING_PRESENT &&
   TOYS.length &&
   FLOATING_PRESENT.addEventListener("click", function () {
     FLOATING_PRESENT.classList.add("opened");
-    toysRemoveEvents();
+    // toysRemoveEvents();
   });
 
 MODAL_PRESENT_HIDE.length &&
@@ -76,7 +76,7 @@ function onCardHover(event) {
 
 function toyClick() {
   modalOpen();
-  toysRemoveEvents();
+  // toysRemoveEvents();
 }
 
 function toysRemoveEvents() {

@@ -1,4 +1,4 @@
-.valentine__toy_06 > *, .valentine__toy_05 > *, .valentine__toy_04 > *, .valentine__toy_03 > *, .valentine__toy_02 > *, .valentine__toy_01 > *, .valentine__heart, .valentine__branch {
+.valentine__toy_06 > *, .valentine__toy_05 > *, .valentine__toy_04 > *, .valentine__toy_03 > *, .valentine__toy_02 > *, .valentine__toy_01 > *, .valentine__wing, .valentine__heart, .valentine__branch {
   display: flex;
   background: none center/contain no-repeat transparent;
   flex-shrink: 0;
@@ -51,19 +51,19 @@
   background-image: url("../valentine/el_03_01.png");
 }
 .valentine__branch > *:nth-child(1) {
-  animation-delay: 1.7937479561s;
+  animation-delay: 4.1219673325s;
 }
 .valentine__branch > *:nth-child(2) {
-  animation-delay: 4.8262554924s;
+  animation-delay: 1.0021064914s;
 }
 .valentine__branch > *:nth-child(3) {
-  animation-delay: 1.8077191702s;
+  animation-delay: 3.1291574279s;
 }
 .valentine__branch > *:nth-child(4) {
-  animation-delay: 4.9463966429s;
+  animation-delay: 4.4324940203s;
 }
 .valentine__branch > *:nth-child(5) {
-  animation-delay: 2.6282965493s;
+  animation-delay: 3.4779527407s;
 }
 .valentine__branch > *:nth-child(2n+1) {
   width: 197px;
@@ -81,16 +81,42 @@
   z-index: 2;
   transform: scaleX(-1);
 }
-.valentine__branch_right > *:nth-child(4), .valentine__branch_right > *:nth-child(4), .valentine__branch_right > *:nth-child(4) {
-  z-index: 4;
+.valentine__center {
+  margin: 0 -20px 50px;
+  z-index: 2;
+  position: relative;
+  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite;
+  pointer-events: all;
 }
 .valentine__heart {
-  z-index: 2;
-  width: 270px;
-  height: 155px;
-  margin: 0 -70px 50px;
-  animation: branch 5s cubic-bezier(0.5, 0, 0.5, 1) 0s infinite;
-  background-image: url("../valentine/el_01.png");
+  width: 140px;
+  height: 133px;
+  position: relative;
+}
+.valentine__heart {
+  background-image: url("../valentine/heart.png");
+}
+.valentine__wing {
+  top: 0px;
+  width: 70px;
+  height: 68px;
+  position: absolute;
+}
+.valentine__wing_left {
+  left: -45px;
+  transform-origin: 100% 60%;
+  background-image: url("../valentine/wing-left.png");
+}
+.valentine__center.animate .valentine__wing_left {
+  animation: wing_left 1s cubic-bezier(0.28, 0.84, 0.42, 1);
+}
+.valentine__wing_right {
+  right: -45px;
+  transform-origin: 0% 60%;
+  background-image: url("../valentine/wing-right.png");
+}
+.valentine__center.animate .valentine__wing_right {
+  animation: wing_right 1s cubic-bezier(0.28, 0.84, 0.42, 1);
 }
 .valentine__toy {
   z-index: 3;
@@ -193,49 +219,49 @@
       transform: translate(-590px, -50px);
 
       > * {
-        animation-delay: 1.3322714843s;
+        animation-delay: 1.230691869s;
       }
     }
     &-02 {
       transform: translate(-420px, -10px) rotate(-10deg);
 
       > * {
-        animation-delay: 1.8176859667s;
+        animation-delay: 1.7868869944s;
       }
     }
     &-03 {
       transform: translate(-880px, -10px) rotate(-10deg);
 
       > * {
-        animation-delay: 0.9936922166s;
+        animation-delay: 1.2983841589s;
       }
     }
     &-04 {
       transform: translate(-960px, -50px) rotate(25deg);
 
       > * {
-        animation-delay: 1.4466729599s;
+        animation-delay: 1.7564543806s;
       }
     }
     &-05 {
       transform: translate(300px, -30px) scaleX(-1);
 
       > * {
-        animation-delay: 0.4100127094s;
+        animation-delay: 1.0759508157s;
       }
     }
     &-06 {
       transform: translate(620px, -40px) scaleX(-1);
 
       > * {
-        animation-delay: 0.7261728809s;
+        animation-delay: 0.9604478064s;
       }
     }
     &-07 {
       transform: translate(910px, -40px) scaleX(-1) rotate(5deg);
 
       > * {
-        animation-delay: 0.7823627113s;
+        animation-delay: 0.0049478896s;
       }
     }
   }*/
@@ -284,7 +310,7 @@
 }
 .valentine__toy_04 {
   z-index: 1;
-  transform: translate(381px, -40px) scale(0.7) rotate(-25deg);
+  transform: translate(271px, -50px) scale(0.7) rotate(-25deg);
   pointer-events: all;
 }
 .valentine__toy_04 > * {
@@ -356,5 +382,33 @@
   }
   100% {
     transform: translateY(0);
+  }
+}
+@keyframes wing_right {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(10deg);
+  }
+  45% {
+    transform: rotate(2deg);
+  }
+  65% {
+    transform: rotate(6deg);
+  }
+}
+@keyframes wing_left {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-10deg);
+  }
+  45% {
+    transform: rotate(-2deg);
+  }
+  65% {
+    transform: rotate(-6deg);
   }
 }

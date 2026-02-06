@@ -38,6 +38,13 @@ $obj: (
   branch02: "../valentine/el_03_02.png",
   branch02-w: 197px,
   branch02-h: 103px,
+  heart: "../valentine/heart.png",
+  heart-w: 140px,
+  heart-h: 133px,
+  wingL: "../valentine/wing-left.png",
+  wingR: "../valentine/wing-right.png",
+  wing-w: 70px,
+  wing-h: 68px,
 );
 
 $branches-margin-sides: -20px;
@@ -123,24 +130,54 @@ $present-animation: present 1.4s cubic-bezier(0.28, 0.84, 0.42, 1);
     &_right {
       z-index: 2;
       transform: scaleX(-1);
+    }
+  }
+  &__center {
+    margin: 0 -20px 50px;
+    z-index: 2;
+    position: relative;
+    animation: $branch-animation;
+    pointer-events: all;
 
-      > * {
-        &:nth-child(4),
-        &:nth-child(4),
-        &:nth-child(4) {
-          z-index: 4;
-        }
-      }
+    &.animate {
+      @extend %center-animate !optional;
     }
   }
   &__heart {
-    z-index: 2;
+    width: map.get($obj, heart-w);
+    height: map.get($obj, heart-h);
+    position: relative;
     @extend %positioning;
-    width: map.get($obj, el01-w);
-    height: map.get($obj, el01-h);
-    margin: 0 -70px 50px;
-    animation: $branch-animation;
-    background-image: url(map.get($obj, el01));
+
+    & {
+      background-image: url(map.get($obj, heart));
+    }
+  }
+  &__wing {
+    top: 0px;
+    width: map.get($obj, wing-w);
+    height: map.get($obj, wing-h);
+    position: absolute;
+    @extend %positioning;
+
+    &_left {
+      left: calc(25px - map.get($obj, wing-w));
+      transform-origin: 100% 60%;
+      background-image: url(map.get($obj, wingL));
+
+      %center-animate & {
+        animation: wing_left 1s cubic-bezier(0.28, 0.84, 0.42, 1);
+      }
+    }
+    &_right {
+      right: calc(25px - map.get($obj, wing-w));
+      transform-origin: 0% 60%;
+      background-image: url(map.get($obj, wingR));
+
+      %center-animate & {
+        animation: wing_right 1s cubic-bezier(0.28, 0.84, 0.42, 1);
+      }
+    }
   }
   &__toy {
     z-index: 3;
@@ -202,7 +239,7 @@ $present-animation: present 1.4s cubic-bezier(0.28, 0.84, 0.42, 1);
     }
     &_04 {
       z-index: 1;
-      transform: translate(381px, -40px) scale(0.7) rotate(-25deg);
+      transform: translate(271px, -50px) scale(0.7) rotate(-25deg);
       pointer-events: all;
 
       > * {
@@ -429,5 +466,33 @@ $present-animation: present 1.4s cubic-bezier(0.28, 0.84, 0.42, 1);
   }
   100% {
     transform: translateY(0);
+  }
+}
+@keyframes wing_right {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(10deg);
+  }
+  45% {
+    transform: rotate(2deg);
+  }
+  65% {
+    transform: rotate(6deg);
+  }
+}
+@keyframes wing_left {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-10deg);
+  }
+  45% {
+    transform: rotate(-2deg);
+  }
+  65% {
+    transform: rotate(-6deg);
   }
 }
